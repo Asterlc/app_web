@@ -12,7 +12,7 @@ import (
 var temp = template.Must(template.ParseGlob("templates/*.html"))
 
 func Index(writer http.ResponseWriter, request *http.Request) {
-	produtos := models.GetProdutos()
+	produtos := models.Get()
 
 	temp.ExecuteTemplate(writer, "Index", produtos)
 }
@@ -31,8 +31,8 @@ func AddProduct(writer http.ResponseWriter, request *http.Request) {
 		fmt.Println(floatErr)
 
 		if intErr != nil && floatErr != nil {
-			log.Println("Error preco", floatErr.Error())
-			log.Println("Erro quantidade", intErr.Error())
+			log.Println("Error to parse product price", floatErr.Error())
+			log.Println("Error to parse product amount", intErr.Error())
 		} else {
 			produto := models.Produto{
 				Nome:       nome,
@@ -40,8 +40,23 @@ func AddProduct(writer http.ResponseWriter, request *http.Request) {
 				Quantidade: quantidade,
 				Preco:      preco,
 			}
-			models.CreateProduct(produto)
+			models.Create(produto)
 			http.Redirect(writer, request, "/", 301)
 		}
+	}
+}
+
+// func EditProduct(writer http.ResponseWriter, request *http.Request) {
+// 	id, error := strconv.Atoi(request.URL.Query().Get("id"))
+// }
+
+func DeleteProduct(writer http.ResponseWriter, request *http.Request) {
+	id, error := strconv.Atoi(request.URL.Query().Get("id"))
+	if error != nil {
+		log.Println("Error on delete", error.Error())
+	} else {
+		models.Delete(id)
+		http.Redirect(writer, request, "/", 301)
+
 	}
 }
