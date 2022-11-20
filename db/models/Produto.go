@@ -2,6 +2,7 @@ package models
 
 import (
 	"app_web/db"
+	"database/sql"
 )
 
 type Produto struct {
@@ -40,4 +41,22 @@ func GetProdutos() []Produto {
 	}
 	db.Close()
 	return produtos
+}
+
+func CreateProduct(produto Produto) (bool, sql.Result) {
+	db := db.Connect()
+
+	prepare, err := db.Prepare("insert into produtos(nome,descricao,quantidade,preco) values($1,$2,$3,$4) ")
+	if err != nil {
+		db.Close()
+		panic(err.Error())
+	}
+	result, sqlError := prepare.Exec(produto.Nome, produto.Descricao, produto.Quantidade, produto.Preco)
+
+	if sqlError != nil {
+		db.Close()
+		panic(sqlError.Error())
+	}
+	db.Close()
+	return true, result
 }
