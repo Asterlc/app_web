@@ -1,12 +1,12 @@
-version: '3.3'
+version: '3.1'
 services :
   db:
-    image: postgres
+    image: postgres:latest
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: administrator
-      POSTGRES_PASSWORD: pass12345
+      POSTGRES_PASSWORD: pass123456
       POSTGRES_DB: produtos
   admin:
     image: adminer
