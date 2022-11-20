@@ -1,0 +1,17 @@
+version: '3.3'
+services :
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: administrator
+      POSTGRES_PASSWORD: pass12345
+      POSTGRES_DB: produtos
+  admin:
+    image: adminer
+    restart: always
+    depends_on: 
+      - db
+    ports:
+      - 8080:8080
