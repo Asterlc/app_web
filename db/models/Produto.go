@@ -2,7 +2,6 @@ package models
 
 import (
 	"app_web/db"
-	"database/sql"
 )
 
 type Produto struct {
@@ -12,9 +11,9 @@ type Produto struct {
 	Preco           float64
 }
 
-func GetProdutos() ([]Produto, *sql.DB) {
-	table := db.Connect()
-	row, error := table.Query("select * from produtos")
+func GetProdutos() []Produto {
+	db := db.Connect()
+	row, error := db.Query("select * from produtos")
 	if error != nil {
 		panic(error.Error())
 	}
@@ -39,5 +38,6 @@ func GetProdutos() ([]Produto, *sql.DB) {
 
 		produtos = append(produtos, p)
 	}
-	return produtos, table
+	db.Close()
+	return produtos
 }
