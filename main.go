@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// CRIAR TABELA: create table produtos(nome varchar, descricao varchar, quantidade integer, preco decimal)
 func main() {
 	fmt.Println("http://localhost:9080")
 	routes.Routes()
