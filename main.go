@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Iniciando na porta 9080")
+	fmt.Println("http://localhost:9080")
 	routes.Routes()
 
 	error := http.ListenAndServe(":9080", nil)

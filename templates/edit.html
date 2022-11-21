@@ -1,22 +1,21 @@
-{{define "New"}}
+{{define "Edit"}}
 {{template "_head"}}
-<!DOCTYPE html>
-<html lang="en">
 <div class="container">
 
     <body>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-5">Novo produto</h1>
-                <p class="lead">Insira os detalhes</p>
+                <h1 class="display-5">Editando produto</h1>
+                <p class="lead">Insira os dados para atualizar ou editar</p>
             </div>
         </div>
-        <form method="POST" action="insert">
+        <form method="POST" action="update">
+            <input type="hidden" name="id" value="{{.Id}}" >
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" class="form-control" required>
+                        <input type="text" name="nome" class="form-control" value="{{.Nome}}" required>
                     </div>
                 </div>
             </div>
@@ -24,7 +23,7 @@
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label for="descricao">Descrição:</label>
-                        <input type="text" name="descricao" class="form-control" required>
+                        <input type="text" name="descricao" class="form-control" value="{{.Descricao}}" required>
                     </div>
                 </div>
             </div>
@@ -32,7 +31,7 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label for="preco">Preço:</label>
-                        <input type="number" name="preco" class="form-control" step="1.33" required>
+                        <input type="number" name="preco" class="form-control" step="1.33" value="{{.Preco}}" required>
                     </div>
                 </div>
             </div>
@@ -41,16 +40,25 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label for="quantidade">Quantidade:</label>
-                        <input type="number" name="quantidade" class="form-control" required>
+                        <input type="number" name="quantidade" class="form-control" value="{{.Quantidade}}" required>
                     </div>
                 </div>
             </div>
-            <button type="submit" value="salvar" class="btn btn-success">Salvar</button>
-            <a class="btn btn-info" href="/update">Voltar</a>
+            <button type="submit" value="salvar" class="btn btn-success">Atualizar</button>
+            <a class="btn btn-info" href="/">Voltar</a>
         </form>
     </body>
+
 </html>
 </div>
 </body>
+<!-- <script>
+    function OnSave(id){
+        let res  = confirm("Não é possível recuperar os dados após deletar.")
+        if(res){
+            window.location = '/delete?id=' + id
+        }
+    }
+</script> -->
 </html>
 {{end}}
