@@ -8,10 +8,10 @@ import (
 	"net/http"
 )
 
-// CRIAR TABELA: create table produtos(nome varchar, descricao varchar, quantidade integer, preco decimal)
+// CRIAR TABELA: create table produtos(id serial primary keynome varchar, descricao varchar, quantidade integer, preco decimal)
 func main() {
 	db := db.Connect()
-	sqlRes, err := db.Exec(fmt.Sprintf("create table if not exists produtos(nome varchar, descricao varchar, quantidade integer, preco decimal)"))
+	sqlRes, err := db.Exec(fmt.Sprintf("create table if not exists produtos(id serial primary key, nome varchar, descricao varchar, quantidade integer, preco decimal)"))
 	if err != nil {
 		log.Fatalln(err.Error())
 	} else {

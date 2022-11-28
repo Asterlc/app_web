@@ -54,8 +54,9 @@ func Create(produto Produto) {
 
 	if sqlError != nil {
 		log.Println(sqlError.Error())
+	} else {
+		log.Println("Product created:", produto.Nome)
 	}
-	log.Println("Product created:", produto.Nome)
 	defer db.Close()
 }
 
